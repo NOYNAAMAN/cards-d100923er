@@ -2,38 +2,26 @@ import { Container } from "@mui/material";
 
 import PageHader from "../../components/PageHader";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+
 import Spinner from "../../components/Spiner";
 import Error from "../../components/Error";
 import CardData from "../components/card/CardData";
+import useCards from "../hooks/useCards";
 
 export default function CardDetailsPage() {
   const { id } = useParams();
-  const [cardData, setCardData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
+  const { card, error, isLoading, getCardById } = useCards();
+
   useEffect(() => {
-    const getCardDeatails = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(
-          `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`
-        );
-        const data = response.data;
-        setCardData(data);
-      } catch (err) {
-        setIsLoading(false);
-        setError(err.message);
-      }
-      setIsLoading(false);
-    };
-    getCardDeatails();
+    getCardById(id);
   }, [id]);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
-  if (cardData) {
+  if (isLoading) return <Spinner />;
+  if (error) return <Error errorMessage={error} />;
+  if (card) {
     return (
       <Container>
         <PageHader
@@ -41,7 +29,7 @@ export default function CardDetailsPage() {
           subtitle="Here you can find all the details about specific card"
         />
 
-        <CardData cardData={cardData} />
+        <CardData cardData={card} />
       </Container>
     );
   }

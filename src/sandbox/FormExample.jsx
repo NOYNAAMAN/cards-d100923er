@@ -1,46 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, TextField } from "@mui/material";
 import Joi from "joi";
+import useForm from "../forms/hooks/useForm";
 
-const schema = Joi.object({
+const schema = {
   firstName: Joi.string().min(2),
   lastName: Joi.string().min(2).max(10),
-});
+};
+
+const initialForm = {
+  firstName: "",
+  lastName: "",
+};
+
+const handleSubmit = (data) => {
+  console.log(data);
+};
 
 export default function FormExample() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-  });
-
-  const handleChange = (event) => {
-    setFormData((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleSubmit = () => {
-    const validateObj = schema.validate(formData);
-    console.log(validateObj);
-  };
+  const { data, errors, handleChange, onSubmit, handleReset, validateForm } =
+    useForm(initialForm, schema, handleSubmit);
 
   return (
     <Box>
-      <Box>
+      <Box sx={{ m: 10 }}>
         <TextField
           label="first name"
-          value={formData.firstName}
+          value={data.firstName}
           name="firstName"
           onChange={handleChange}
+          helperText={errors.firstName}
+          error={Boolean(errors.firstName)}
         />
         <TextField
           label="last name"
-          value={formData.lastName}
+          value={data.lastName}
           name="lastName"
           onChange={handleChange}
+          helperText={errors.lastName}
+          error={Boolean(errors.lastName)}
         />
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={onSubmit} disabled={!validateForm()}>
+          Submit
+        </Button>
+        <Button onClick={handleReset}>Reset</Button>
       </Box>
     </Box>
   );

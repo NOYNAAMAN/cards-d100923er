@@ -13,6 +13,10 @@ export default function SandBox() {
           <NavItem to="life" label="LifeCycle" />
           <NavItem to="countries" label="Countries List" />
           <NavItem to="form" label="Form" />
+          <NavItem to="resize" label="resize" />
+          <NavItem to="login" label="Login" />
+          <NavItem to="signup" label="Sign Up" />
+          <NavItem to="optimization" label="Optimization" />
         </Toolbar>
       </AppBar>
       <Outlet />
