@@ -15,45 +15,51 @@ export default function useForm(initialForm, schema, handleSubmit) {
     [schema]
   );
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    const errorMessage = validateProperty(name, value);
+  const handleChange = useCallback(
+    (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      const errorMessage = validateProperty(name, value);
 
-    if (errorMessage) {
-      setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-    } else {
-      setErrors((prev) => {
-        let obj = { ...prev };
-        delete obj[name];
-        return obj;
-      });
-    }
-    console.log(typeof value);
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+      if (errorMessage) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+      } else {
+        setErrors((prev) => {
+          let obj = { ...prev };
+          delete obj[name];
+          return obj;
+        });
+      }
+      console.log(typeof value);
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    [validateProperty]
+  );
 
-  const handleChangeCheckBox = (event) => {
-    const name = event.target.name;
-    const value = event.target.checked;
-    const errorMessage = validateProperty(name, value);
-    if (errorMessage) {
-      setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-    } else {
-      setErrors((prev) => {
-        let obj = { ...prev };
-        delete obj[name];
-        return obj;
-      });
-    }
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChangeCheckBox = useCallback(
+    (event) => {
+      const name = event.target.name;
+      const value = event.target.checked;
+      const errorMessage = validateProperty(name, value);
+      if (errorMessage) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+      } else {
+        setErrors((prev) => {
+          let obj = { ...prev };
+          delete obj[name];
+          return obj;
+        });
+      }
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    [validateProperty]
+  );
 
   const handleReset = () => {
     setData(initialForm);
