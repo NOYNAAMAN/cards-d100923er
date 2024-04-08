@@ -22,7 +22,7 @@ export default function useCards() {
     setIsLoading(false);
   }, []);
 
-  const getCardById = async (id) => {
+  const getCardById = useCallback(async (id) => {
     try {
       setError(null);
       setIsLoading(true);
@@ -35,7 +35,7 @@ export default function useCards() {
       setError(err.message);
     }
     setIsLoading(false);
-  };
+  }, []);
   const handleCardDelete = (id) => {
     console.log("you deleted card no" + id);
   };

@@ -66,7 +66,6 @@ export default function useForm(initialForm, schema, handleSubmit) {
     if (error) return false;
     return true;
   };
-
   const onSubmit = () => {
     const handleSubmit = (data) => {
       console.log(data);
