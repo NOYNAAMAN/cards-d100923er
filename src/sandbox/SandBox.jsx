@@ -14,9 +14,9 @@ export default function SandBox() {
           <NavItem to="countries" label="Countries List" />
           <NavItem to="form" label="Form" />
           <NavItem to="resize" label="resize" />
-          <NavItem to="login" label="Login" />
-          <NavItem to="signup" label="Sign Up" />
+
           <NavItem to="optimization" label="Optimization" />
+          <NavItem to="context" label="context" />
         </Toolbar>
       </AppBar>
       <Outlet />

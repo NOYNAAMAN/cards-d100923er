@@ -1,16 +1,16 @@
-import { Button, TableCell, TableHead, TableRow } from "@mui/material";
+import { Button, TableCell, TableHead, TableRow, Box } from "@mui/material";
 import React from "react";
 
-export default function TableTop({ refreshFunc, countriesList }) {
+export default function TableTop({ refreshFunc, isLoading }) {
   return (
-    <div>
-      {countriesList.length === 0 ? (
+    <Box>
+      {isLoading ? (
         <TableHead>
           <TableRow>
-            <TableCell>Country Name :</TableCell>
+            <TableCell>Country name:</TableCell>
             <TableCell>
               <Button variant="contained" disabled>
-                Refresh
+                Refrash list
               </Button>
             </TableCell>
           </TableRow>
@@ -18,15 +18,15 @@ export default function TableTop({ refreshFunc, countriesList }) {
       ) : (
         <TableHead>
           <TableRow>
-            <TableCell>Country Name :</TableCell>
+            <TableCell>Country name:</TableCell>
             <TableCell>
               <Button variant="contained" onClick={refreshFunc}>
-                Refresh
+                Refrash list
               </Button>
             </TableCell>
           </TableRow>
         </TableHead>
       )}
-    </div>
+    </Box>
   );
 }

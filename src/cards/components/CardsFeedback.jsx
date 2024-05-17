@@ -1,17 +1,15 @@
 import React from "react";
-
 import { Typography } from "@mui/material";
-
-import Spinner from "../../../components/Spiner";
-import Error from "../../../components/Error";
-import Cards from "../Cards";
+import Spinner from "../../components/Spiner";
+import Cards from "./Cards";
+import Error from "../../components/Error";
 
 export default function CardsFeedback({
   isLoading,
   cards,
   error,
   handleDelete,
-  handleLike,
+  handleCardLike,
 }) {
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
@@ -27,7 +25,7 @@ export default function CardsFeedback({
       <Cards
         cards={cards}
         handleCardDelete={handleDelete}
-        handleCardLike={handleLike}
+        handleCardLike={handleCardLike}
       />
     );
   }

@@ -8,9 +8,11 @@ import Spinner from "../../components/Spiner";
 import Error from "../../components/Error";
 import CardData from "../components/card/CardData";
 import useCards from "../hooks/useCards";
+import MapsComponent from "../components/MapsComponent";
 
 export default function CardDetailsPage() {
   const { id } = useParams();
+
   const { card, error, isLoading, getCardById } = useCards();
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function CardDetailsPage() {
         />
 
         <CardData cardData={card} />
+        <MapsComponent card={card} />
       </Container>
     );
   }

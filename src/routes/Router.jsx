@@ -14,11 +14,14 @@ import Countries from "../sandbox/countries/Countries";
 import FormExample from "../sandbox/FormExample";
 
 import ResizeWindow from "../sandbox/ResizeWindow";
-import Login from "../sandbox/Login";
-import SignUp from "../sandbox/SignUp";
 import SignupPage from "../users/pages/SignupPage";
 import LoginPage from "../users/pages/LoginPage";
 import ParentComponent from "../sandbox/optimization/ParentComponent";
+import ParentPageComponent from "../sandbox/context/ParentPageComponent";
+import AddCardPage from "../cards/pages/AddCardPage";
+import EditCardPage from "../cards/pages/EditCardPage";
+import FavoriteCards from "../cards/pages/FavoriteCards";
+import MyCards from "../cards/pages/MyCards";
 
 export default function Router() {
   return (
@@ -29,6 +32,10 @@ export default function Router() {
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailsPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTES.CREATE_CARD} element={<AddCardPage />} />
+      <Route path={ROUTES.EDIT_CARD + "/:id"} element={<EditCardPage />} />
+      <Route path={ROUTES.FAV_CARDS} element={<FavoriteCards />} />
+      <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandBox />}>
         <Route path="counter" element={<Counter />} />
@@ -37,9 +44,9 @@ export default function Router() {
         <Route path="countries" element={<Countries />} />
         <Route path="form" element={<FormExample />} />
         <Route path="resize" element={<ResizeWindow />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="signup" element={<SignupPage />} />
+
         <Route path="optimization" element={<ParentComponent />} />
+        <Route path="context" element={<ParentPageComponent />} />
       </Route>
       <Route path={ROUTES.ADD} element={<Component />}>
         <Route path="myboxsize" element={<MyBoxSize />} />

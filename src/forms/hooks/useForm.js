@@ -61,27 +61,27 @@ export default function useForm(initialForm, schema, handleSubmit) {
     [validateProperty]
   );
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setData(initialForm);
     setErrors({});
-  };
+  }, [initialForm]);
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema);
     const { error } = schemaForValidate.validate(data);
     if (error) return false;
     return true;
-  };
-  const onSubmit = () => {
-    const handleSubmit = (data) => {
-      console.log(data);
-    };
+  }, [schema, data]);
+
+  const onSubmit = useCallback(() => {
     handleSubmit(data);
-  };
+    console.log("data", data);
+  }, [handleSubmit, data]);
 
   return {
     data,
     errors,
+    setData,
     handleChange,
     handleReset,
     validateForm,

@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 
-import CardsFeedback from "../components/card/CardsFeedback";
 import useCards from "../hooks/useCards";
+import AddNewCardButton from "../components/AddNewCardButton";
+import CardsFeedback from "../components/CardsFeedback";
 
 export default function CardsPage() {
   const {
@@ -12,21 +13,22 @@ export default function CardsPage() {
 
     handleCardDelete,
     handleCardLike,
-    getAllCard,
+    getAllCards,
   } = useCards();
   useEffect(() => {
-    getAllCard();
-  }, [getAllCard]);
+    getAllCards();
+  }, [getAllCards]);
 
   return (
     <Box>
       <CardsFeedback
         cards={cards}
         handleDelete={handleCardDelete}
-        handleLike={handleCardLike}
+        handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}
       />
+      <AddNewCardButton />
     </Box>
   );
 }

@@ -3,20 +3,21 @@ import useForm from "../../forms/hooks/useForm";
 import initialLoginForm from "../helpers/initialForms/initialLoginForm";
 import loginSchema from "../models/loginSchema";
 import Container from "@mui/material/Container";
-
 import Form from "../../forms/components/Form";
-
 import PageHader from "../../components/PageHader";
 import Input from "../../forms/components/Input";
 import ROUTES from "../../routes/routerModel";
-
-const handleSubmit = (x) => {
-  console.log(x);
-};
+import { useUser } from "../providers/UserProviders";
+import { Navigate } from "react-router-dom";
+import useUsers from "../hooks/useUsers";
 
 export default function LoginPage() {
+  const { handleLogin } = useUsers();
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-    useForm(initialLoginForm, loginSchema, handleSubmit);
+    useForm(initialLoginForm, loginSchema, handleLogin);
+  const { user } = useUser();
+
+  if (user) return <Navigate to={ROUTES.ROOT} replace={true} />;
   return (
     <Container>
       <PageHader titel="Welcome to Login page" subtitle="here you can log in" />
