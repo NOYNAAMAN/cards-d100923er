@@ -2,11 +2,12 @@ import React from "react";
 import CardComponent from "./card/CardComponent";
 import { Box, Container, Typography } from "@mui/material";
 import PageHader from "../../components/PageHader";
-import { useUser } from "../../users/providers/UserProviders";
 import { useLocation } from "react-router-dom";
+import ROUTES from "../../routes/routerModel";
+import useUsers from "../../users/hooks/useUsers";
 
 export default function Cards({ cards, handleCardDelete, handleCardLike }) {
-  const { user } = useUser();
+  const { user, limitedAccesLoginAlert } = useUsers();
   const location = useLocation();
 
   if (cards && cards.length === 0) {
@@ -16,7 +17,7 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
       </Typography>
     );
   }
-  if (location.pathname === "/cards")
+  if (location.pathname === ROUTES.CARDS || location.pathname === ROUTES.ROOT)
     return (
       <Box>
         <PageHader
@@ -36,7 +37,8 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
       </Box>
     );
 
-  if (location.pathname === "/my-cards") {
+  if (location.pathname === ROUTES.MY_CARDS) {
+    if (!user) return limitedAccesLoginAlert();
     const filterdCards = cards.filter((card) => card.user_id === user._id);
     return (
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
@@ -52,7 +54,8 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
     );
   }
 
-  if (location.pathname === "/fav-cards") {
+  if (location.pathname === ROUTES.FAV_CARDS) {
+    if (!user) return limitedAccesLoginAlert();
     const filterdCards = cards.filter((card) => card.likes.includes(user._id));
 
     return (
@@ -68,4 +71,5 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
       </Container>
     );
   }
+  return null;
 }

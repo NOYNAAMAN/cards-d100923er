@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import useCards from "../hooks/useCards";
 import AddNewCardButton from "../components/AddNewCardButton";
 import CardsFeedback from "../components/CardsFeedback";
+import { useUser } from "../../users/providers/UserProviders";
 
 export default function CardsPage() {
   const {
@@ -19,6 +20,8 @@ export default function CardsPage() {
     getAllCards();
   }, [getAllCards]);
 
+  const { user } = useUser();
+
   return (
     <Box>
       <CardsFeedback
@@ -28,7 +31,7 @@ export default function CardsPage() {
         isLoading={isLoading}
         error={error}
       />
-      <AddNewCardButton />
+      {user && (user.isAdmin || user.isBusiness) ? <AddNewCardButton /> : null}
     </Box>
   );
 }

@@ -10,7 +10,7 @@ export const login = async (userLogin) => {
     console.log("login response data", response);
     return data;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err.response.data);
   }
 };
 
@@ -19,7 +19,7 @@ export const signup = async (normalizedUser) => {
     const { data } = await axios.post(apiUrl, normalizedUser);
     return data;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err.response.data);
   }
 };
 
@@ -28,6 +28,6 @@ export const getUserData = async (id) => {
     const { data } = await axios.get(`${apiUrl}/${id}`);
     return data;
   } catch (err) {
-    throw new Error(err.message);
+    throw new Error(err.response.data);
   }
 };

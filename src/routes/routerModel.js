@@ -13,6 +13,7 @@ const ROUTES = {
   EDIT_USER: "/edit-user",
   SANDBOX: "/sandbox",
   ADD: "/other",
+  PROFILE: "/profile",
 };
 
 export default ROUTES;

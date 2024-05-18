@@ -4,7 +4,7 @@ import PageHader from "../../components/PageHader";
 import CardsFeedback from "../components/CardsFeedback";
 import AddNewCardButton from "../components/AddNewCardButton";
 
-export default function FavoritCardsPage() {
+export default function FavoriteCardsPage() {
   const {
     isLoading,
     error,

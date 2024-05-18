@@ -5,9 +5,12 @@ import StyleIcon from "@mui/icons-material/Style";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { useUser } from "../../users/providers/UserProviders";
 
 export default function Footer() {
   const navigate = useNavigate();
+  const { user } = useUser();
   return (
     <Paper
       sx={{
@@ -31,6 +34,22 @@ export default function Footer() {
           icon={<StyleIcon />}
           onClick={() => navigate(ROUTES.CARDS)}
         />
+
+        {user ? (
+          <BottomNavigationAction
+            label="Favorite"
+            icon={<StyleIcon />}
+            onClick={() => navigate(ROUTES.FAV_CARDS)}
+          />
+        ) : null}
+        {(user && user.isBusiness === true) ||
+        (user && user.isAdmin === true) ? (
+          <BottomNavigationAction
+            label="My Cards"
+            icon={<AccountBoxIcon />}
+            onClick={() => navigate(ROUTES.MY_CARDS)}
+          />
+        ) : null}
       </BottomNavigation>
     </Paper>
   );

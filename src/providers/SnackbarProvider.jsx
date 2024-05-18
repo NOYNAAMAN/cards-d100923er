@@ -4,17 +4,21 @@ import { Alert, Snackbar } from "@mui/material";
 const SnackbarContext = createContext();
 
 export default function SnackbarProvider({ children }) {
-  const [isSnackOpen, setOpenSnack] = useState(false);
-  const [snackColor, setSnackColor] = useState("success");
-  const [snackVariant, setSnackVariant] = useState("filled");
-  const [snackMessage, setSnackMessage] = useState("in snackbar");
+  const [snackQueue, setSnackQueue] = useState([]);
 
   const setSnack = useCallback((color, message, variant = "filled") => {
-    setOpenSnack(true);
-    setSnackColor(color);
-    setSnackVariant(variant);
-    setSnackMessage(message);
+    const key = new Date().getTime();
+    setSnackQueue((prevQueue) => [
+      ...prevQueue,
+      { key, color, message, variant },
+    ]);
   }, []);
+
+  const handleClose = (key) => {
+    setSnackQueue((prevQueue) =>
+      prevQueue.filter((snack) => snack.key !== key)
+    );
+  };
 
   return (
     <>
@@ -22,24 +26,30 @@ export default function SnackbarProvider({ children }) {
         {children}
       </SnackbarContext.Provider>
 
-      <Snackbar
-        anchorOrigin={{ vertical: "bootom", horizontal: "left" }}
-        open={isSnackOpen}
-        onClose={() => {
-          setOpenSnack(false);
-        }}
-        autoHideDuration={5000}
-      >
-        <Alert severity={snackColor} variant={snackVariant}>
-          {snackMessage}
-        </Alert>
-      </Snackbar>
+      {snackQueue.map((snack) => (
+        <Snackbar
+          key={snack.key}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={true}
+          onClose={() => handleClose(snack.key)}
+          autoHideDuration={5000}
+        >
+          <Alert
+            onClose={() => handleClose(snack.key)}
+            severity={snack.color}
+            variant={snack.variant}
+          >
+            {snack.message}
+          </Alert>
+        </Snackbar>
+      ))}
     </>
   );
 }
 
 export const useSnack = () => {
   const context = useContext(SnackbarContext);
-  if (!context) throw Error("useSnackbar must be used within a NameProvider");
+  if (!context)
+    throw new Error("useSnackbar must be used within a SnackbarProvider");
   return context;
 };

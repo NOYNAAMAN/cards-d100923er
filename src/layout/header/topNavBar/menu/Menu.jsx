@@ -32,7 +32,7 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
     >
       <Box>
         <MenuLink
-          text="about"
+          text="About"
           navigateTo={ROUTES.ABOUT}
           onClick={onClose}
           styles={{ display: { xs: "block", md: "none" } }}
@@ -41,13 +41,13 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
         {!user && (
           <>
             <MenuLink
-              text="login"
+              text="Login"
               navigateTo={ROUTES.LOGIN}
               onClick={onClose}
               styles={{ display: { xs: "block", md: "none" } }}
             />
             <MenuLink
-              text="signup"
+              text="Signup"
               navigateTo={ROUTES.SIGNUP}
               onClick={onClose}
               styles={{ display: { xs: "block", md: "none" } }}
@@ -58,12 +58,12 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
         {user && (
           <>
             <MenuLink
-              text="profile"
-              navigateTo={ROUTES.USER_PROFILE}
+              text="Profile"
+              navigateTo={ROUTES.PROFILE}
               onClick={onClose}
             />
             <MenuLink
-              text="edit account"
+              text="Edit Account"
               navigateTo={ROUTES.EDIT_USER}
               onClick={onClose}
             />

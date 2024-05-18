@@ -18,31 +18,22 @@ export default function CardActionBar({
   likes,
 }) {
   const { user } = useUser();
-  const loggedInUserId = user._id;
+  let loggedInUserId = 0;
+  if (user) {
+    loggedInUserId = user._id;
+  }
 
   const navigate = useNavigate();
   const setSnack = useSnack();
 
   const [liked, setLiked] = useState(likes.includes(loggedInUserId));
 
-  const omriHasNothingToDo = false;
-  const omriNeedToCome = () => {
-    console.log("I'm coming!");
-  };
-  const omriWillNotCome = () => {
-    console.log("Sorry, I can't come! :(");
-  };
-  const omriIsComeToMe = () => {
-    if (omriHasNothingToDo) {
-      omriNeedToCome();
-    } else {
-      omriWillNotCome();
-    }
-  };
-
-  omriIsComeToMe();
-
   const toggleLike = () => {
+    if (!user)
+      return setSnack(
+        "error",
+        "Like available only for logged-in users! Please signin"
+      );
     setLiked(!liked);
     const changeLikeStatus = handleCardLike(cardId);
     if (changeLikeStatus) {
@@ -60,6 +51,7 @@ export default function CardActionBar({
     console.log("Navigate to edit page for card", id);
     navigate(ROUTES.EDIT_CARD + "/" + id);
   };
+
   return (
     <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
       <Box>
@@ -79,7 +71,11 @@ export default function CardActionBar({
           <CallIcon />
         </IconButton>
         <IconButton onClick={toggleLike}>
-          {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          {liked ? (
+            <FavoriteIcon sx={{ color: "#e71e41a3" }} />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
         </IconButton>
       </Box>
     </CardActions>
