@@ -81,6 +81,7 @@ const useUsers = () => {
       setError(error.message);
     }
   }, []);
+
   return {
     user,
     isLoading,
