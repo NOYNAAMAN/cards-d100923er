@@ -20,7 +20,7 @@ export default function useCards() {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const [marker, Setmarker] = useState({});
+  const [marker, setMarker] = useState({});
   const navigate = useNavigate();
   const setSnack = useSnack();
 
@@ -125,11 +125,12 @@ export default function useCards() {
   }, []);
 
   const addressForMap = useCallback(async (address) => {
+    // debugger;
     setIsLoading(true);
     setError(null);
     try {
       const marker = await getLocationCoordniate(normalizeAdress(address));
-      Setmarker(marker);
+      setMarker(marker);
     } catch (error) {
       setError(error.message);
     }

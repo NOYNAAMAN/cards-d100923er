@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useEffect, useState, useCallback } from "react";
+import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import useCards from "../hooks/useCards";
 
 const containerStyle = {
@@ -9,17 +9,66 @@ const containerStyle = {
 
 const Map = ({ card }) => {
   const { addressForMap, marker } = useCards();
+  const [locationExist, setLocationExist] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAddress = useCallback(async () => {
+    try {
+      setLoading(true);
+      await addressForMap(card.address);
+      setLocationExist(!!marker.lat);
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      setLocationExist(false);
+    } finally {
+      setLoading(false);
+    }
+  }, [addressForMap, card.address, marker.lat]);
 
   useEffect(() => {
-    addressForMap(card.address);
-  }, [addressForMap, card]);
+    fetchAddress();
+    console.log("useEffect is running");
+  }, [fetchAddress]);
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap mapContainerStyle={containerStyle} center={marker} zoom={10}>
-        <Marker position={marker} />
-      </GoogleMap>
-    </LoadScript>
+    <>
+      {loading ? (
+        <div>Loading map...</div>
+      ) : locationExist ? (
+        <LoadScript
+          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        >
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={marker}
+            zoom={10}
+          >
+            <Marker position={marker} />
+          </GoogleMap>
+        </LoadScript>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            height: "500px",
+          }}
+        >
+          <img
+            src="/assets/imgs/error-location.png"
+            alt="Location not found"
+            style={{
+              height: "600px",
+              width: "600px",
+              objectFit: "contain",
+              margin: 0,
+              padding: 0,
+            }}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
