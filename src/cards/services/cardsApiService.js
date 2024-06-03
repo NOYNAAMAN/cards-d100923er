@@ -95,11 +95,21 @@ export const getLocationCoordniate = async (address) => {
   const params = {
     key: googelMapKey,
     address,
+    loading: "async"
   };
   axios.defaults.headers.common["x-auth-token"] = null;
   try {
-    const response = await axios.get(googleMapUrl, { params });
-    return response.data.results[0].geometry.location;
+    if (process.env.IS_PRODUCTION) {
+      const response = await axios.get(googleMapUrl, { params });
+      return response.data.results[0].geometry.location;
+    }
+    else {
+      console.log("Google maps API are not called - we are not in production mode.");
+      return {
+        lat: 32.084041,
+        lng: 34.887762
+      };
+    }
   } catch (error) {
     throw new Error(error.message);
   }

@@ -7,13 +7,13 @@ import {
   getCard,
   getCards,
   getLocationCoordniate,
-} from "../srevices/cardsApiService";
+} from "../services/cardsApiService";
 import { useSnack } from "../../providers/SnackbarProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
 import useAxios from "../../hooks/useAxios";
 import normalizeCard from "../helpers/normalization/normalizeCard";
-import normalizeAdress from "../helpers/normalization/normalizeAddress";
+import normalizeAddress from "../helpers/normalization/normalizeAddress";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
@@ -31,7 +31,6 @@ export default function useCards() {
       setError(null);
       setIsLoading(true);
       const data = await getCards();
-      // console.log("");
       setCards(data);
     } catch (err) {
       setError(err.message);
@@ -54,7 +53,6 @@ export default function useCards() {
 
   const handleCreateCard = useCallback(
     async (cardFromClient) => {
-      console.log("cardFromClient", cardFromClient);
       setError(null);
       setIsLoading(true);
 
@@ -64,7 +62,6 @@ export default function useCards() {
         setSnack("success", "A new business card has been created");
         setTimeout(() => {
           navigate(-1);
-          console.log("done");
         }, 1000);
       } catch (error) {
         setError(error.message);
@@ -101,7 +98,7 @@ export default function useCards() {
       try {
         const card = await deleteCard(cardId);
         setCard(card);
-        setSnack("success", "The  card has been successfully deleted");
+        setSnack("success", "The card has been successfully deleted");
         setTimeout(() => {
           getAllCards();
         }, 1000);
@@ -117,24 +114,24 @@ export default function useCards() {
     setError(null);
     try {
       await changeLikeStatus(cardId);
-
-      console.log("you liked this card number : " + cardId);
     } catch (error) {
       setError(error.message);
     }
   }, []);
 
   const addressForMap = useCallback(async (address) => {
-    // debugger;
     setIsLoading(true);
     setError(null);
     try {
-      const marker = await getLocationCoordniate(normalizeAdress(address));
+      const marker = await getLocationCoordniate(normalizeAddress(address));
       setMarker(marker);
+      return marker;
     } catch (error) {
       setError(error.message);
+      throw error;
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
   return {

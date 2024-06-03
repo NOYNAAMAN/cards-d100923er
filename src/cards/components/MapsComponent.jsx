@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 import useCards from "../hooks/useCards";
 
@@ -11,22 +11,28 @@ const Map = ({ card }) => {
   const { addressForMap, marker } = useCards();
   const [locationExist, setLocationExist] = useState(false);
   const [loading, setLoading] = useState(true);
+  const hasFetchedAddress = useRef(false);
 
   const fetchAddress = useCallback(async () => {
     try {
       setLoading(true);
-      await addressForMap(card.address);
-      setLocationExist(!!marker.lat);
+      const newMarker = await addressForMap(card.address);
+      console.log("this map component has been called ");
+      setLocationExist(!!newMarker.lat);
+      console.log("marker lat", newMarker.lat);
     } catch (error) {
       console.error("Error fetching address:", error);
       setLocationExist(false);
     } finally {
       setLoading(false);
     }
-  }, [addressForMap, card.address, marker.lat]);
+  }, [addressForMap, card.address]);
 
   useEffect(() => {
-    fetchAddress();
+    if (!hasFetchedAddress.current) {
+      fetchAddress();
+      hasFetchedAddress.current = true;
+    }
     console.log("useEffect is running");
   }, [fetchAddress]);
 
@@ -34,10 +40,8 @@ const Map = ({ card }) => {
     <>
       {loading ? (
         <div>Loading map...</div>
-      ) : locationExist ? (
-        <LoadScript
-          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        >
+      ) : locationExist && process.env.IS_PRODUCTION ? (
+        <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&loading=async`}>
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={marker}
