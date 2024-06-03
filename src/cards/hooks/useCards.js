@@ -14,6 +14,7 @@ import ROUTES from "../../routes/routerModel";
 import useAxios from "../../hooks/useAxios";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import normalizeAddress from "../helpers/normalization/normalizeAddress";
+import { usePopup } from "../../providers/PopupProvider";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
@@ -23,6 +24,7 @@ export default function useCards() {
   const [marker, setMarker] = useState({});
   const navigate = useNavigate();
   const setSnack = useSnack();
+  const { showPopup } = usePopup();
 
   useAxios();
 
@@ -75,7 +77,6 @@ export default function useCards() {
   const handleUpdateCard = useCallback(
     async (cardId, cardFromClient) => {
       setIsLoading(true);
-
       try {
         const card = await editCard(cardId, normalizeCard(cardFromClient));
         setCard(card);
@@ -93,21 +94,28 @@ export default function useCards() {
 
   const handleCardDelete = useCallback(
     async (cardId) => {
-      setIsLoading(true);
-
-      try {
-        const card = await deleteCard(cardId);
-        setCard(card);
-        setSnack("success", "The card has been successfully deleted");
-        setTimeout(() => {
-          getAllCards();
-        }, 1000);
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsLoading(false);
+      // Show the confirmation popup
+      showPopup(
+        "Delete Card",
+        "Are you sure you want to delete this card?",
+        async () => {
+          try {
+            setIsLoading(true);
+            const card = await deleteCard(cardId);
+            setCard(card);
+            setSnack("success", "The card has been successfully deleted");
+            setTimeout(() => {
+              getAllCards();
+            }, 1000);
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setIsLoading(false);
+          }
+        }
+      );
     },
-    [setSnack, getAllCards]
+    [setSnack, getAllCards, showPopup]
   );
 
   const handleCardLike = useCallback(async (cardId) => {

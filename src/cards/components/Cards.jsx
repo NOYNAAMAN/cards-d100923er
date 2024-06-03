@@ -17,7 +17,8 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
       </Typography>
     );
   }
-  if (location.pathname === ROUTES.CARDS || location.pathname === ROUTES.ROOT)
+  if (location.pathname === ROUTES.CARDS || location.pathname === ROUTES.ROOT) {
+    console.log("omriaaas");
     return (
       <Box>
         <PageHader
@@ -36,6 +37,7 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
         </Container>
       </Box>
     );
+  }
 
   if (location.pathname === ROUTES.MY_CARDS) {
     if (!user) return limitedAccesLoginAlert();

@@ -60,6 +60,7 @@ export default function CardActionBar({
             <IconButton onClick={() => handleCardDelete(cardId)}>
               <DeleteIcon />
             </IconButton>
+
             <IconButton onClick={() => handleCardEdit(cardId)}>
               <ModeEditIcon />
             </IconButton>

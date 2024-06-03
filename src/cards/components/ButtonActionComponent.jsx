@@ -1,13 +1,12 @@
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
-import useCards from "../hooks/useCards";
 
-export default function AddNewCardButton() {
+export default function ButtonActionComponent({ icon }) {
   const navigate = useNavigate();
-  const { handleCreateCard } = useCards();
   return (
     <Fab
       color="primary"
@@ -18,11 +17,12 @@ export default function AddNewCardButton() {
         right: 16,
       }}
       onClick={() => {
-        navigate(ROUTES.CREATE_CARD);
-        handleCreateCard();
+        icon === "Add" && navigate(ROUTES.CREATE_CARD);
+        icon === "Edit" && navigate(ROUTES.EDIT_USER);
       }}
     >
-      <AddIcon />
+      {icon === "Add" && <AddIcon />}
+      {icon === "Edit" && <EditIcon />}
     </Fab>
   );
 }

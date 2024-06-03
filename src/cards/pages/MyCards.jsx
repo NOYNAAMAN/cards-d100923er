@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 import useCards from "../hooks/useCards";
-import AddNewCardButton from "../components/AddNewCardButton";
 import CardsFeedback from "../components/CardsFeedback";
 import PageHader from "../../components/PageHader";
+import ButtonActionComponent from "../components/ButtonActionComponent";
 
 export default function MyCards() {
   const {
@@ -32,7 +32,7 @@ export default function MyCards() {
         isLoading={isLoading}
         error={error}
       />
-      <AddNewCardButton />
+      <ButtonActionComponent icon={"Add"} />
     </div>
   );
 }

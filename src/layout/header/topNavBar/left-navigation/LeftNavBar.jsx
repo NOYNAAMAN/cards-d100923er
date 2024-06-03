@@ -12,13 +12,15 @@ export default function LeftNavBar() {
     <Box>
       <LogoIcon />
       <Logo />
-      <NavItem to={ROUTES.CARDS} label={"Cards"} />
+
       <NavItem to={ROUTES.ABOUT} label={"About"} />
       {user ? <NavItem to={ROUTES.FAV_CARDS} label={"Favorite Cards"} /> : null}
-      {user && (user.isAdmin || user.isBusiness) ? (
+      {user && (user.isBusiness || user.isAdmin) && (
         <NavItem to={ROUTES.MY_CARDS} label={"My Cards"} />
-      ) : null}
-      <NavItem to={ROUTES.SANDBOX} label={"Sandbox"} />
+      )}
+      {user && user.isAdmin && (
+        <NavItem to={ROUTES.SANDBOX} label={"Sandbox"} />
+      )}
     </Box>
   );
 }

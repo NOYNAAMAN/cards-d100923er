@@ -9,6 +9,7 @@ import ROUTES from "../../routes/routerModel";
 import { Container } from "@mui/material";
 import CardForm from "../components/CardForm";
 import cardSchema from "../models/cardSchema";
+import { usePopup } from "../../providers/PopupProvider";
 
 export default function EditCardPage() {
   //what do we need in this page
@@ -19,6 +20,7 @@ export default function EditCardPage() {
 
   //user - useUser (provider)
   const { user } = useUser();
+  const { showPopup } = usePopup();
   //useForm (initialForm,schema,onSubmit)
   const {
     data,
@@ -29,7 +31,13 @@ export default function EditCardPage() {
     validateForm,
     onSubmit,
   } = useForm(initialCardForm, cardSchema, (newCard) =>
-    handleUpdateCard(card._id, newCard)
+    showPopup(
+      "Confirm Save",
+      "Are you sure you want to save the changes?",
+      () => {
+        handleUpdateCard(card._id, newCard);
+      }
+    )
   );
   //useEffect - update the form data to this card data
   useEffect(() => {

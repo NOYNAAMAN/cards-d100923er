@@ -1,6 +1,11 @@
 import { useCallback, useState } from "react";
 import { useUser } from "../providers/UserProviders";
-import { getUserData, login, signup } from "../services/userApiService";
+import {
+  getUserData,
+  login,
+  signup,
+  updateUser,
+} from "../services/userApiService";
 import {
   getUser,
   removeToken,
@@ -10,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../../providers/SnackbarProvider";
+import useAxios from "../../hooks/useAxios";
+import mapToModelUser from "../helpers/normalization/mapToModelUser";
 
 const useUsers = () => {
   const [isLoading, setIsLoading] = useState();
@@ -17,6 +24,7 @@ const useUsers = () => {
   const navigate = useNavigate();
   const setSnack = useSnack();
   const { user, setUser, setToken } = useUser();
+  useAxios();
 
   const handleLogin = useCallback(
     async (userLogin) => {
@@ -82,6 +90,22 @@ const useUsers = () => {
     }
   }, []);
 
+  const handleUpdateUser = useCallback(
+    async (id, userData) => {
+      setIsLoading(true);
+      try {
+        const response = await updateUser(id, mapToModelUser(userData));
+        setSnack("success", "Updated successfully");
+        setIsLoading(false);
+        navigate(ROUTES.ROOT);
+        return response;
+      } catch (error) {
+        setError(error.message);
+      }
+    },
+    [setSnack, navigate]
+  );
+
   return {
     user,
     isLoading,
@@ -91,6 +115,7 @@ const useUsers = () => {
     handleSignup,
     limitedAccesLoginAlert,
     handleGetUser,
+    handleUpdateUser,
   };
 };
 

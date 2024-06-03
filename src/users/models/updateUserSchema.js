@@ -1,23 +1,28 @@
 import Joi from "joi";
 
-const urlRegex = /^(https?:\/\/.+)$|(^.*\.(png|jpg|jpeg|gif|webp|svg))$/i;
-
-const updateUserSchema = {
+const updateUserSchema = Joi.object({
+  "name.first": Joi.string().min(2).max(256).required(),
+  "name.middle": Joi.string().min(2).max(256).allow(""),
+  "name.last": Joi.string().min(2).max(256).required(),
   phone: Joi.string()
-    .ruleset.regex(/^0[0-9]{1,2}-?\s?[0-9]{7}$/)
-    .rule({ message: 'card "phone" mast be a valid phone number' })
+    .regex(/0[0-9]{1,2}-?\s?[0-9]{3}\s?[0-9]{4}/)
+    .message('user "phone" must be a valid phone number')
     .required(),
-  imageUrl: Joi.string()
-    .ruleset.regex(urlRegex)
-    .rule({ message: 'card.image "url" mast be a valid url' })
+  "image.url": Joi.string()
+    .regex(
+      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+    )
+    .message("user image must be a valid url")
     .allow(""),
-  imageAlt: Joi.string().min(2).max(256).allow(""),
-  state: Joi.string().allow(""),
-  country: Joi.string().min(2).max(256).required(),
-  city: Joi.string().min(2).max(256).required(),
-  street: Joi.string().min(2).max(256).required(),
-  houseNumber: Joi.number().required(),
-  zip: Joi.number(),
-};
+  "image.alt": Joi.string().min(2).max(256).allow(""),
+  address: Joi.object({
+    country: Joi.string().min(2).max(256).required(),
+    city: Joi.string().min(2).max(256).required(),
+    street: Joi.string().min(2).max(256).required(),
+    houseNumber: Joi.number().required(),
+    state: Joi.string().allow(""),
+    zip: Joi.number().optional(),
+  }),
+});
 
 export default updateUserSchema;

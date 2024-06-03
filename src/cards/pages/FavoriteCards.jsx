@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import useCards from "../hooks/useCards";
 import PageHader from "../../components/PageHader";
 import CardsFeedback from "../components/CardsFeedback";
-import AddNewCardButton from "../components/AddNewCardButton";
+import ButtonActionComponent from "../components/ButtonActionComponent";
+import { useUser } from "../../users/providers/UserProviders";
 
 export default function FavoriteCardsPage() {
   const {
@@ -14,6 +15,8 @@ export default function FavoriteCardsPage() {
     handleCardLike,
     getAllCards,
   } = useCards();
+
+  const { user } = useUser();
 
   useEffect(() => {
     getAllCards();
@@ -32,7 +35,9 @@ export default function FavoriteCardsPage() {
         isLoading={isLoading}
         error={error}
       />
-      <AddNewCardButton />
+      {user && (user.isAdmin || user.isBusiness) ? (
+        <ButtonActionComponent icon={"Add"} />
+      ) : null}
     </div>
   );
 }

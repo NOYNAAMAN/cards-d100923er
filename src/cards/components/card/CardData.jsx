@@ -9,11 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-// import normalizeAdress from "../../helpers/normalization/normalizeAddress";
-// import { getLocationCoordinate } from "../../srevices/cardsApiService";
 
 export default function CardData({ cardData }) {
-  // console.log(getLocationCoordinate(normalizeAdress(cardData)));
   return (
     <Box>
       <Avatar src={cardData.image.url} />

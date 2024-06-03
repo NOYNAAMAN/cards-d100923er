@@ -2,6 +2,7 @@ import axios from "axios";
 const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
 const googelMapKey = "AIzaSyCnivG9jiYuxJxHMUPLOIm7EAVLNSv69ns";
 const googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json";
+
 export const getCards = async () => {
   try {
     const response = await axios.get(apiUrl);

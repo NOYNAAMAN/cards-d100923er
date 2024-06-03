@@ -3,7 +3,7 @@ import useForm from "../../forms/hooks/useForm";
 import initialSignupForm from "../helpers/initialForms/initialSignupForm";
 import signupSchema from "../models/signupSchema";
 import Container from "@mui/material/Container";
-import SignupForm from "../conponents/SignupForm";
+import SignupForm from "../components/SignupForm";
 import { useUser } from "../providers/UserProviders";
 import { Navigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";

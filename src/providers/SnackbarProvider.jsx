@@ -19,6 +19,7 @@ export default function SnackbarProvider({ children }) {
       prevQueue.filter((snack) => snack.key !== key)
     );
   };
+  console.log("setSnack:", setSnack);
 
   return (
     <>

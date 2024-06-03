@@ -29,19 +29,14 @@ export default function Footer() {
           icon={<InfoIcon />}
           onClick={() => navigate(ROUTES.ABOUT)}
         />
-        <BottomNavigationAction
-          label="cards"
-          icon={<StyleIcon />}
-          onClick={() => navigate(ROUTES.CARDS)}
-        />
 
-        {user ? (
+        {user && (
           <BottomNavigationAction
             label="Favorite"
             icon={<StyleIcon />}
             onClick={() => navigate(ROUTES.FAV_CARDS)}
           />
-        ) : null}
+        )}
         {(user && user.isBusiness === true) ||
         (user && user.isAdmin === true) ? (
           <BottomNavigationAction

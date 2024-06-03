@@ -8,7 +8,7 @@ export default function CardsFeedback({
   isLoading,
   cards,
   error,
-  handleDelete,
+  handleCardDelete,
   handleCardLike,
 }) {
   if (isLoading) return <Spinner />;
@@ -24,7 +24,7 @@ export default function CardsFeedback({
     return (
       <Cards
         cards={cards}
-        handleCardDelete={handleDelete}
+        handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
       />
     );

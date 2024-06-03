@@ -23,6 +23,8 @@ import EditCardPage from "../cards/pages/EditCardPage";
 import FavoriteCards from "../cards/pages/FavoriteCards";
 import MyCards from "../cards/pages/MyCards";
 import ProfilePage from "../cards/pages/ProfilePage";
+import UpdateUserPage from "../users/pages/UpdateUserPage";
+import SearchMenu from "../layout/header/topNavBar/rightnavigation/SearchMenu";
 
 export default function Router() {
   return (
@@ -30,6 +32,7 @@ export default function Router() {
       <Route path={ROUTES.ROOT} element={<CardsPage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+      <Route path={ROUTES.ROOT} element={<SearchMenu />} />
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailsPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
@@ -38,6 +41,7 @@ export default function Router() {
       <Route path={ROUTES.FAV_CARDS} element={<FavoriteCards />} />
       <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+      <Route path={ROUTES.EDIT_USER} element={<UpdateUserPage />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandBox />}>
         <Route path="counter" element={<Counter />} />
