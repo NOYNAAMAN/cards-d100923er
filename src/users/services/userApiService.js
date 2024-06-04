@@ -32,6 +32,15 @@ export const getUserData = async (id) => {
   }
 };
 
+export const getallUsers = async () => {
+  try {
+    const { data } = await axios.get(`${apiUrl}`);
+    return data;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
+};
+
 export const updateUser = async (userId, userData) => {
   try {
     const { data } = await axios.put(`${apiUrl}/${userId}`, userData);

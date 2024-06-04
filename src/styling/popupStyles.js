@@ -1,11 +1,13 @@
-// popupStyles.js
-export const popupStyles = {
+export const getPopupStyles = (
+  backgroundColor = "##ffcc00",
+  textColor = "white"
+) => ({
   popupContainer: {
     position: "fixed",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "#1976d2",
+    backgroundColor: backgroundColor,
     padding: "20px",
     borderRadius: "10px",
     border: "2px solid white",
@@ -24,9 +26,9 @@ export const popupStyles = {
   },
   button: {
     backgroundColor: "transparent",
-    border: "2px solid white",
-    color: "white",
+    border: `2px solid ${textColor}`,
+    color: textColor,
     zIndex: 10000,
     marginLeft: "10px",
   },
-};
+});

@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useUser } from "../providers/UserProviders";
 import {
   getUserData,
+  getallUsers,
   login,
   signup,
   updateUser,
@@ -89,6 +90,17 @@ const useUsers = () => {
       setError(error.message);
     }
   }, []);
+  const handleGetUsers = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const usersData = await getallUsers();
+      console.log("users:", usersData);
+      setIsLoading(false);
+      return usersData;
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
 
   const handleUpdateUser = useCallback(
     async (id, userData) => {
@@ -116,6 +128,7 @@ const useUsers = () => {
     limitedAccesLoginAlert,
     handleGetUser,
     handleUpdateUser,
+    handleGetUsers,
   };
 };
 

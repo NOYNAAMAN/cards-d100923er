@@ -15,6 +15,7 @@ import useAxios from "../../hooks/useAxios";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import normalizeAddress from "../helpers/normalization/normalizeAddress";
 import { usePopup } from "../../providers/PopupProvider";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
@@ -98,6 +99,7 @@ export default function useCards() {
       showPopup(
         "Delete Card",
         "Are you sure you want to delete this card?",
+
         async () => {
           try {
             setIsLoading(true);
@@ -112,7 +114,11 @@ export default function useCards() {
           } finally {
             setIsLoading(false);
           }
-        }
+        },
+        null,
+        DeleteIcon,
+        "white",
+        "red"
       );
     },
     [setSnack, getAllCards, showPopup]

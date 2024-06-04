@@ -25,8 +25,11 @@ import MyCards from "../cards/pages/MyCards";
 import ProfilePage from "../cards/pages/ProfilePage";
 import UpdateUserPage from "../users/pages/UpdateUserPage";
 import SearchMenu from "../layout/header/topNavBar/rightnavigation/SearchMenu";
+import ListUsers from "../users/admin/components/ListUsers";
+import { getUser } from "../users/services/localStorageService";
 
 export default function Router() {
+  const user = getUser();
   return (
     <Routes>
       <Route path={ROUTES.ROOT} element={<CardsPage />} />
@@ -57,6 +60,9 @@ export default function Router() {
       <Route path={ROUTES.ADD} element={<Component />}>
         <Route path="myboxsize" element={<MyBoxSize />} />
       </Route>
+      {user && user.isAdmin && (
+        <Route path={ROUTES.ADMIN} element={<ListUsers />} />
+      )}
 
       <Route path="*" element={<ErrorPage />} />
     </Routes>
