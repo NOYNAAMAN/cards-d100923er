@@ -99,3 +99,11 @@ To get started with this project, clone the repository and install the dependenc
 git clone https://github.com/NOYNAAMAN/cards-d100923er
 npm install
 ```
+
+### User types
+### Admin
+### Business User
+## Regular User:
+### API documentation:
+CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
+USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
