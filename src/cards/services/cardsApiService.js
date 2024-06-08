@@ -43,18 +43,14 @@ export const createCard = async (card) => {
     const { data } = await axios.post(apiUrl, card);
     return data;
   } catch (error) {
-    console.error("Error making request:", error.message); // Log error message
+    console.error("Error making request:", error.message);
     if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
       console.error("Error response data:", error.response.data);
       console.error("Error response status:", error.response.status);
       console.error("Error response headers:", error.response.headers);
     } else if (error.request) {
-      // The request was made but no response was received
       console.error("No response received for the request:", error.request);
     } else {
-      // Something happened in setting up the request that triggered an Error
       console.error("Error setting up the request:", error.message);
     }
     return Promise.reject(error.message);
@@ -66,18 +62,14 @@ export const editCard = async (cardId, normalaizedCard) => {
     const { data } = await axios.put(`${apiUrl}/${cardId}`, normalaizedCard);
     return data;
   } catch (error) {
-    console.error("Error making request:", error.message); // Log error message
+    console.error("Error making request:", error.message);
     if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
       console.error("Error response data:", error.response.data);
       console.error("Error response status:", error.response.status);
       console.error("Error response headers:", error.response.headers);
     } else if (error.request) {
-      // The request was made but no response was received
       console.error("No response received for the request:", error.request);
     } else {
-      // Something happened in setting up the request that triggered an Error
       console.error("Error setting up the request:", error.message);
     }
     return Promise.reject(error.message);
@@ -96,18 +88,17 @@ export const getLocationCoordniate = async (address) => {
   const params = {
     key: googelMapKey,
     address,
-    loading: "async"
+    loading: "async",
   };
   axios.defaults.headers.common["x-auth-token"] = null;
   try {
     if (process.env.IS_PRODUCTION) {
       const response = await axios.get(googleMapUrl, { params });
       return response.data.results[0].geometry.location;
-    }
-    else {
+    } else {
       return {
         lat: 32.084041,
-        lng: 34.887762
+        lng: 34.887762,
       };
     }
   } catch (error) {

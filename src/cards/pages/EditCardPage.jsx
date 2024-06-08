@@ -12,16 +12,11 @@ import cardSchema from "../models/cardSchema";
 import { usePopup } from "../../providers/PopupProvider";
 
 export default function EditCardPage() {
-  //what do we need in this page
-  //id of the card - useParams
   const { id } = useParams();
-  //handleUpdateCard & handleGetCard & card - useCards
   const { handleUpdateCard, getCardById, card } = useCards();
-
-  //user - useUser (provider)
   const { user } = useUser();
   const { showPopup } = usePopup();
-  //useForm (initialForm,schema,onSubmit)
+
   const {
     data,
     errors,
@@ -39,7 +34,7 @@ export default function EditCardPage() {
       }
     )
   );
-  //useEffect - update the form data to this card data
+
   useEffect(() => {
     getCardById(id).then((data) => {
       const modelCard = mapCardToModel(data);

@@ -95,7 +95,6 @@ export default function useCards() {
 
   const handleCardDelete = useCallback(
     async (cardId) => {
-      // Show the confirmation popup
       showPopup(
         "Delete Card",
         "Are you sure you want to delete this card?",

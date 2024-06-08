@@ -19,7 +19,10 @@ export default function LeftNavBar() {
   if (isMobile) {
     return (
       <Box className="box-Menu">
+        <LogoIcon />
+
         <NavItem to={ROUTES.ABOUT} label={"About"} />
+
         {user && user.isAdmin && <NavItem to={ROUTES.ADMIN} label={"Admin"} />}
         <SearchMenu />
         <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>

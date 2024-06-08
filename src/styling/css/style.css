@@ -38,22 +38,12 @@
   color: black;
 }
 
-/* @media (min-width: 600px) {
-  .header-typograph-admin {
-    font-size: 3rem;
-  }
-} */
-
 @media (max-width: 600px) {
   .box-Menu {
     display: flex;
     align-items: center;
   }
-  .header-typograph-admin {
-    font-size: 2rem;
-    padding-right: 5px;
-    padding-left: 5px;
-  }
+
   .about-section {
     margin: 10px;
     padding: 15px;

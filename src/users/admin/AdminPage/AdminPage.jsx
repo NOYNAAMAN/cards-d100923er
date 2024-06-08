@@ -1,7 +1,8 @@
 import React from "react";
-import ListUsers from "../components/ListUsers";
+
 import "../../../../src/styling/css/style.css";
 import PageHader from "../../../components/PageHader";
+import ListUsers from "./ListUsers";
 export default function AdminPage() {
   return (
     <>
