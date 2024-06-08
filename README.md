@@ -71,16 +71,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### User Accounts
 
 ### Admin
-Email: mosesadmin1@email.com
- Password: Moses1234@
+Email:admin@gmail.com
+ Password: ------
  
 ### Business User
-Email: daniel@tests3.com
-Password: Dd1234567!
+Email: Fibla@gmail.com
+Password:FFFn12546@
 
 ### Regular User
-Email: daniel@testss.com
-Password: daniel@testss.com
+Email: ibla@gmail.com
+Password:POPLOLp125$
 
 ### API Documentation
 CARDS
