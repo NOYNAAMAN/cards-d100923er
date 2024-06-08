@@ -45,6 +45,10 @@
 } */
 
 @media (max-width: 600px) {
+  .box-Menu {
+    display: flex;
+    align-items: center;
+  }
   .header-typograph-admin {
     font-size: 2rem;
     padding-right: 5px;

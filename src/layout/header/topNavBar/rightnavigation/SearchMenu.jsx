@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { InputBase } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import useDebounce from "../../../../hooks/useDebounce";
+import { useLocation, useNavigate } from "react-router-dom";
 import ROUTES from "../../../../routes/routerModel";
 
 const Search = styled("div")(({ theme }) => ({
@@ -49,21 +48,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchMenu() {
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
-  useEffect(() => {
-    if (debouncedSearchQuery) {
-      const searchPath = `${ROUTES.CARDS}?search=${debouncedSearchQuery}`;
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      const searchPath = `${ROUTES.CARDS}?search=${searchQuery}`;
       if (location.pathname + location.search !== searchPath) {
-        window.location.replace(searchPath);
+        navigate(searchPath);
       }
     }
-  }, [debouncedSearchQuery, location.pathname, location.search]);
+  };
 
   return (
     <Search>
@@ -74,6 +73,7 @@ export default function SearchMenu() {
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
         onChange={handleSearchChange}
+        onKeyDown={handleKeyDown}
       />
     </Search>
   );

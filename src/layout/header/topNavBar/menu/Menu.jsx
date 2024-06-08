@@ -67,8 +67,24 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
               navigateTo={ROUTES.EDIT_ACCOUNT}
               onClick={onClose}
             />
+
+            <MenuLink
+              text="Favorite Cards"
+              navigateTo={ROUTES.FAV_CARDS}
+              onClick={onClose}
+              styles={{ display: { xs: "block", md: "none" } }}
+            />
             <MenuItem onClick={onLogout}>Logout</MenuItem>
           </>
+        )}
+
+        {user && (user.isBusiness || user.isAdmin) && (
+          <MenuLink
+            text="My Cards"
+            navigateTo={ROUTES.MY_CARDS}
+            onClick={onClose}
+            styles={{ display: { xs: "block", md: "none" } }}
+          />
         )}
       </Box>
     </MuiMenu>

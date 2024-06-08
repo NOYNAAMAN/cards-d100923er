@@ -24,10 +24,12 @@ export default function RightNavBar() {
         <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
-        <SearchMenu />
+
         {user && <Logged />}
         {!user && <NotLogged />}
+        <SearchMenu />
       </Box>
+
       <MoreButton />
     </>
   );

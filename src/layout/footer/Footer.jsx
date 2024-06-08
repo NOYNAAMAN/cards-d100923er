@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 
 import InfoIcon from "@mui/icons-material/Info";
-import StyleIcon from "@mui/icons-material/Style";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
@@ -33,7 +33,7 @@ export default function Footer() {
         {user && (
           <BottomNavigationAction
             label="Favorite"
-            icon={<StyleIcon />}
+            icon={<LoyaltyIcon />}
             onClick={() => navigate(ROUTES.FAV_CARDS)}
           />
         )}

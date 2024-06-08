@@ -4,20 +4,8 @@ import ROUTES from "./routerModel";
 import AboutPage from "../pages/AboutPage";
 import ErrorPage from "../pages/ErrorPage";
 import CardDetailsPage from "../cards/pages/CardDetailsPage";
-import SandBox from "../sandbox/SandBox";
-import Counter from "../sandbox/Counter";
-import MyBoxColor from "../sandbox/MyBoxColor";
-import MyBoxSize from "../sandbox/other/MyBoxSize";
-import Component from "../sandbox/other/Component";
-import LifeCycle from "../sandbox/LifeCycle";
-import Countries from "../sandbox/countries/Countries";
-import FormExample from "../sandbox/FormExample";
-
-import ResizeWindow from "../sandbox/ResizeWindow";
 import SignupPage from "../users/pages/SignupPage";
 import LoginPage from "../users/pages/LoginPage";
-import ParentComponent from "../sandbox/optimization/ParentComponent";
-import ParentPageComponent from "../sandbox/context/ParentPageComponent";
 import AddCardPage from "../cards/pages/AddCardPage";
 import EditCardPage from "../cards/pages/EditCardPage";
 import FavoriteCards from "../cards/pages/FavoriteCards";
@@ -47,22 +35,10 @@ export default function Router() {
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
       <Route path={ROUTES.EDIT_ACCOUNT} element={<UpdateUserPage />} />
 
-      <Route path={ROUTES.SANDBOX} element={<SandBox />}>
-        <Route path="counter" element={<Counter />} />
-        <Route path="BOX" element={<MyBoxColor />} />
-        <Route path="life" element={<LifeCycle />} />
-        <Route path="countries" element={<Countries />} />
-        <Route path="form" element={<FormExample />} />
-        <Route path="resize" element={<ResizeWindow />} />
-
-        <Route path="optimization" element={<ParentComponent />} />
-        <Route path="context" element={<ParentPageComponent />} />
-      </Route>
-      <Route path={ROUTES.ADD} element={<Component />}>
-        <Route path="myboxsize" element={<MyBoxSize />} />
-      </Route>
-      {user && user.isAdmin && (
+      {user && user.isAdmin ? (
         <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+      ) : (
+        <Route path={ROUTES.CARDS} element={<CardsPage />} />
       )}
 
       <Route path="*" element={<ErrorPage />} />
