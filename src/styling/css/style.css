@@ -1,0 +1,67 @@
+.table-cell {
+  background-color: #3874d0;
+  border: 4px solid #2586c6;
+}
+.typograph {
+  padding-left: 15px;
+}
+.users-table {
+  width: 100%;
+  max-width: 100%;
+}
+
+.about-section {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  color: black;
+}
+.about-section h1,
+.about-section h2 {
+  color: black;
+}
+.about-section p {
+  line-height: 1.6;
+  color: black;
+}
+.about-section ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: black;
+}
+.about-section ul li {
+  margin-bottom: 10px;
+  color: black;
+}
+
+@media (max-width: 600px) {
+  .header-typograph-admin {
+    font-size: 2rem;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
+@media (min-width: 600px) {
+  .header-typograph-admin {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .about-section h2 {
+    font-size: 1.2em;
+  }
+  .about-section p,
+  .about-section ul li {
+    font-size: 1em;
+  }
+}

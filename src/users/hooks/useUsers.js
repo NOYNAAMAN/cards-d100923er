@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { useUser } from "../providers/UserProviders";
 import {
+  changeStatusBesnesseUser,
+  deleteUser,
   getUserData,
   getallUsers,
   login,
@@ -19,12 +21,16 @@ import { useSnack } from "../../providers/SnackbarProvider";
 import useAxios from "../../hooks/useAxios";
 import mapToModelUser from "../helpers/normalization/mapToModelUser";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import { usePopup } from "../../providers/PopupProvider";
+
 const useUsers = () => {
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const setSnack = useSnack();
   const { user, setUser, setToken } = useUser();
+  const { showPopup } = usePopup();
   useAxios();
 
   const handleLogin = useCallback(
@@ -90,8 +96,10 @@ const useUsers = () => {
       setError(error.message);
     }
   }, []);
+
   const handleGetUsers = useCallback(async () => {
     setIsLoading(true);
+
     try {
       const usersData = await getallUsers();
       console.log("users:", usersData);
@@ -118,6 +126,45 @@ const useUsers = () => {
     [setSnack, navigate]
   );
 
+  const handeleDeleteUser = useCallback(
+    async (userId) => {
+      showPopup(
+        "Delete User",
+        "Are you sure you want to delete this user?",
+
+        async () => {
+          try {
+            setIsLoading(true);
+            const user = await deleteUser(userId);
+            setUser(user);
+            setSnack("success", "The user has been successfully deleted");
+            setTimeout(() => {
+              getallUsers();
+            }, 1000);
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setIsLoading(false);
+          }
+        },
+        null,
+        DeleteIcon,
+        "white",
+        "red"
+      );
+    },
+    [setSnack, setUser, showPopup]
+  );
+
+  const changeUserStatus = useCallback(async (user) => {
+    try {
+      const response = await changeStatusBesnesseUser(user);
+      return response;
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
+
   return {
     user,
     isLoading,
@@ -129,6 +176,8 @@ const useUsers = () => {
     handleGetUser,
     handleUpdateUser,
     handleGetUsers,
+    changeUserStatus,
+    handeleDeleteUser,
   };
 };
 

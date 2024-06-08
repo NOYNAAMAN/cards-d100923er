@@ -7,10 +7,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Checkbox } from "@mui/material";
+import { Avatar, Checkbox, IconButton } from "@mui/material";
+import Spinner from "../../../components/Spiner";
+import Delete from "@mui/icons-material/Delete";
+import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
+import "../../../styling/css/style.css";
 
 export default function ListUsers() {
-  const { handleGetUsers } = useUsers();
+  const { handleGetUsers, changeUserStatus, isLoading, handeleDeleteUser } =
+    useUsers();
 
   const [users, setUsers] = useState([]);
 
@@ -24,11 +29,26 @@ export default function ListUsers() {
     fetchUsers();
   }, [handleGetUsers]);
 
+  const handleCheckboxChange = async (userId, currentStatus) => {
+    try {
+      await changeUserStatus(userId);
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, isBusiness: !currentStatus } : user
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update user status:", error);
+    }
+  };
+
+  if (isLoading) return <Spinner />;
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
+    <TableContainer component={Paper} className="users-table">
+      <Table sx={{ minWidth: 300 }}>
+        <TableHead className="table-cell">
+          <TableRow sx={{ textAlign: "center" }}>
             <TableCell>Profile</TableCell>
             <TableCell align="right">Full Name</TableCell>
             <TableCell align="right">Email</TableCell>
@@ -41,12 +61,9 @@ export default function ListUsers() {
         </TableHead>
         <TableBody>
           {users.map((user) => (
-            <TableRow
-              key={user._id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {user.name.first}
+            <TableRow key={user._id}>
+              <TableCell>
+                <Avatar src={user.image.url} alt={user.image.alt} />
               </TableCell>
               <TableCell align="right">
                 {user.name.first}, {user.name.middle},{user.name.last}
@@ -59,10 +76,33 @@ export default function ListUsers() {
                 {user.address.zip}
               </TableCell>
               <TableCell align="right">
-                {" "}
-                <Checkbox value={user.isBusiness.toString()} color="primary" />
+                <Checkbox
+                  checked={user.isBusiness}
+                  color="primary"
+                  onChange={() =>
+                    handleCheckboxChange(user._id, user.isBusiness)
+                  }
+                />
               </TableCell>
-              <TableCell align="right"> {user.isAdmin.toString()}</TableCell>
+              <TableCell align="right">
+                {" "}
+                <Checkbox checked={user.isAdmin} color="primary" disabled />
+              </TableCell>
+
+              <TableCell align="right">
+                <IconButton
+                  onClick={() => handeleDeleteUser(user._id)}
+                  className={
+                    user.isAdmin ? "delete-button-admin" : "delete-button"
+                  }
+                >
+                  {user.isAdmin ? (
+                    <DeleteForeverSharpIcon />
+                  ) : (
+                    <Delete color="primary" />
+                  )}
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

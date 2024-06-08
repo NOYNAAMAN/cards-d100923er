@@ -50,3 +50,21 @@ export const updateUser = async (userId, userData) => {
     throw new Error(err.response.data);
   }
 };
+
+export const deleteUser = async (userId) => {
+  try {
+    const { data } = await axios.delete(`${apiUrl}/${userId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+};
+
+export const changeStatusBesnesseUser = async (id) => {
+  try {
+    const { data } = await axios.patch(`${apiUrl}/${id}`);
+    return data;
+  } catch (err) {
+    throw new Error(err.response.data);
+  }
+};

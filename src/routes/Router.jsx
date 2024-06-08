@@ -25,8 +25,10 @@ import MyCards from "../cards/pages/MyCards";
 import ProfilePage from "../cards/pages/ProfilePage";
 import UpdateUserPage from "../users/pages/UpdateUserPage";
 import SearchMenu from "../layout/header/topNavBar/rightnavigation/SearchMenu";
-import ListUsers from "../users/admin/components/ListUsers";
+
 import { getUser } from "../users/services/localStorageService";
+import AdminPage from "../users/admin/AdminPage/AdminPage";
+import Carousel from "../components/Carousel ";
 
 export default function Router() {
   const user = getUser();
@@ -45,6 +47,7 @@ export default function Router() {
       <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
       <Route path={ROUTES.EDIT_USER} element={<UpdateUserPage />} />
+      <Route path={ROUTES.HOME_PAGE} element={<Carousel />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandBox />}>
         <Route path="counter" element={<Counter />} />
@@ -61,7 +64,7 @@ export default function Router() {
         <Route path="myboxsize" element={<MyBoxSize />} />
       </Route>
       {user && user.isAdmin && (
-        <Route path={ROUTES.ADMIN} element={<ListUsers />} />
+        <Route path={ROUTES.ADMIN} element={<AdminPage />} />
       )}
 
       <Route path="*" element={<ErrorPage />} />

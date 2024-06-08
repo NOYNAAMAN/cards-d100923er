@@ -15,6 +15,7 @@ const ROUTES = {
   ADD: "/other",
   ADMIN: "/admin",
   PROFILE: "/profile",
+  HOME_PAGE: "/page",
 };
 
 export default ROUTES;

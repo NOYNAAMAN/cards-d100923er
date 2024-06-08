@@ -1,7 +1,7 @@
 import { Button, Typography, Icon } from "@mui/material";
 import React, { createContext, useState, useContext } from "react";
 import WarningIcon from "@mui/icons-material/Warning"; // ניתן להחליף בכל אייקון אחר
-import { getPopupStyles } from "../styling/popupStyles";
+import { getPopupStyles } from "../styling/js/popupStyles";
 
 const PopupContext = createContext();
 
