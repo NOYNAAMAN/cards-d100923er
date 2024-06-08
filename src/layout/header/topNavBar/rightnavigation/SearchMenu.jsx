@@ -66,17 +66,15 @@ export default function SearchMenu() {
   }, [debouncedSearchQuery, location.pathname, location.search]);
 
   return (
-    <form>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-          onChange={handleSearchChange}
-        />
-      </Search>
-    </form>
+    <Search>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase
+        placeholder="Search…"
+        inputProps={{ "aria-label": "search" }}
+        onChange={handleSearchChange}
+      />
+    </Search>
   );
 }

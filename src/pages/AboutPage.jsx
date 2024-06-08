@@ -6,11 +6,11 @@ export default function AboutPage() {
   return (
     <Box>
       <PageHader
-        titel="About Page"
+        title="About Page"
         subtitle="on this page you can find explanations about ..."
       ></PageHader>
 
-      <div class="about-section">
+      <div className="about-section">
         <h1>About Our Website</h1>
         <p>
           Welcome to our website, the leading platform for creating and

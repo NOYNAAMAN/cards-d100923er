@@ -12,7 +12,6 @@ const CardForm = ({
   data,
   title,
 }) => {
-  console.log("errors", errors);
   return (
     <Form
       onSubmit={onSubmit}

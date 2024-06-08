@@ -6,7 +6,7 @@ export default function AdminPage() {
   return (
     <>
       <PageHader
-        titel={"Hello Admin"}
+        title={"Hello Admin"}
         subtitle={"here you can see all the users"}
       ></PageHader>
       <ListUsers />

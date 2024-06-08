@@ -16,7 +16,6 @@ export const getToken = () => {
 export const getUser = () => {
   try {
     const userToken = getToken();
-    console.log("decrypted token", jwtDecode(userToken));
     return jwtDecode(userToken);
   } catch (error) {
     return null;

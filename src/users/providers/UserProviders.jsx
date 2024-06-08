@@ -8,7 +8,7 @@ import React, {
 import { getUser, getToken } from "../services/localStorageService";
 
 const UserContext = createContext();
-// const user = null;
+
 export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(getToken());

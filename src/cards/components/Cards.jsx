@@ -18,11 +18,10 @@ export default function Cards({ cards, handleCardDelete, handleCardLike }) {
     );
   }
   if (location.pathname === ROUTES.CARDS || location.pathname === ROUTES.ROOT) {
-    console.log("omriaaas");
     return (
       <Box>
         <PageHader
-          titel="Cards"
+          title="Cards"
           subtitle=" In this page you can see all the cards .."
         />
         <Container sx={{ display: "flex", flexWrap: "wrap" }}>

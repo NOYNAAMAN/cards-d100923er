@@ -28,7 +28,6 @@ import SearchMenu from "../layout/header/topNavBar/rightnavigation/SearchMenu";
 
 import { getUser } from "../users/services/localStorageService";
 import AdminPage from "../users/admin/AdminPage/AdminPage";
-import Carousel from "../components/Carousel ";
 
 export default function Router() {
   const user = getUser();
@@ -47,7 +46,6 @@ export default function Router() {
       <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
       <Route path={ROUTES.EDIT_USER} element={<UpdateUserPage />} />
-      <Route path={ROUTES.HOME_PAGE} element={<Carousel />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandBox />}>
         <Route path="counter" element={<Counter />} />

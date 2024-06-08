@@ -17,9 +17,7 @@ const Map = ({ card }) => {
     try {
       setLoading(true);
       const newMarker = await addressForMap(card.address);
-      console.log("this map component has been called ");
       setLocationExist(!!newMarker.lat);
-      console.log("marker lat", newMarker.lat);
     } catch (error) {
       console.error("Error fetching address:", error);
       setLocationExist(false);
@@ -33,7 +31,6 @@ const Map = ({ card }) => {
       fetchAddress();
       hasFetchedAddress.current = true;
     }
-    console.log("useEffect is running");
   }, [fetchAddress]);
 
   return (
