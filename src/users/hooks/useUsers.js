@@ -10,9 +10,10 @@ import {
   updateUser,
 } from "../services/userApiService";
 import {
+  LOCAL_STORAGE_KEYS,
   getUser,
   removeToken,
-  setTokenInLocalStorage,
+  setItemInLocalStorage,
 } from "../services/localStorageService";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routerModel";
@@ -32,17 +33,13 @@ const useUsers = () => {
   const { user, setUser, setToken } = useUser();
   const { showPopup } = usePopup();
   useAxios();
-  // const isUserBlocked = true;
 
   const handleLogin = useCallback(
     async (userLogin) => {
       setIsLoading(true);
       try {
-        // if(isUserBlocked) {
-        //   throw new Error("The user is blocked");
-        // }
         const token = await login(userLogin);
-        setTokenInLocalStorage(token);
+        setItemInLocalStorage(LOCAL_STORAGE_KEYS.USER_TOKEN, token);
         setToken(token);
         setUser(getUser());
         navigate(ROUTES.CARDS);

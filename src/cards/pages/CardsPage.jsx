@@ -6,6 +6,7 @@ import CardsFeedback from "../components/CardsFeedback";
 import { useUser } from "../../users/providers/UserProviders";
 import ButtonActionComponent from "../components/ButtonActionComponent";
 
+
 export default function CardsPage() {
   const {
     cards,
@@ -40,7 +41,7 @@ export default function CardsPage() {
     <Box>
       <CardsFeedback
         cards={filteredCards}
-        handleDelete={handleCardDelete}
+        handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}

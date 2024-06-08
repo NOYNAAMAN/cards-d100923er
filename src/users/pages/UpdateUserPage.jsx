@@ -55,7 +55,7 @@ export default function UpdateUserPage() {
       <EditForm
         onReset={handleReset}
         validateForm={validateForm}
-        title={"Edit Form"}
+        title={"Edit Account"}
         errors={errors}
         data={data}
         onInputChange={handleChange}

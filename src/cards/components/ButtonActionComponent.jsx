@@ -18,7 +18,7 @@ export default function ButtonActionComponent({ icon }) {
       }}
       onClick={() => {
         icon === "Add" && navigate(ROUTES.CREATE_CARD);
-        icon === "Edit" && navigate(ROUTES.EDIT_USER);
+        icon === "Edit" && navigate(ROUTES.EDIT_ACCOUNT);
       }}
     >
       {icon === "Add" && <AddIcon />}

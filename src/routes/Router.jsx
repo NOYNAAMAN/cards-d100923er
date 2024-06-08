@@ -45,7 +45,7 @@ export default function Router() {
       <Route path={ROUTES.FAV_CARDS} element={<FavoriteCards />} />
       <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-      <Route path={ROUTES.EDIT_USER} element={<UpdateUserPage />} />
+      <Route path={ROUTES.EDIT_ACCOUNT} element={<UpdateUserPage />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandBox />}>
         <Route path="counter" element={<Counter />} />

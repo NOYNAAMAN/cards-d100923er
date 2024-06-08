@@ -1,14 +1,24 @@
 import axios from "axios";
+import { addFailedAttempt, isUserBlocked } from "./blockUserService";
 
 const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users";
 
 export const login = async (userLogin) => {
   try {
+    if (isUserBlocked(userLogin.email)) {
+      throw new Error("The user is blocked, please try again later.");
+    }
     const response = await axios.post(apiUrl + "/login", userLogin);
     const data = response.data;
     return data;
   } catch (err) {
-    throw new Error(err.response.data);
+    if (err.response) {
+      if (err.response.status === 400) {
+        addFailedAttempt(userLogin.email)
+      }
+      throw new Error(err.response.data);
+    }
+    throw new Error(err.message);
   }
 };
 

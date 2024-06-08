@@ -62,6 +62,7 @@ const Map = ({ card }) => {
             style={{
               height: "600px",
               width: "600px",
+              maxWidth: "100%",
               objectFit: "contain",
               margin: 0,
               padding: 0,

@@ -38,21 +38,18 @@
   color: black;
 }
 
+/* @media (min-width: 600px) {
+  .header-typograph-admin {
+    font-size: 3rem;
+  }
+} */
+
 @media (max-width: 600px) {
   .header-typograph-admin {
     font-size: 2rem;
     padding-right: 5px;
     padding-left: 5px;
   }
-}
-
-@media (min-width: 600px) {
-  .header-typograph-admin {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 600px) {
   .about-section {
     margin: 10px;
     padding: 15px;
@@ -64,5 +61,11 @@
   .about-section p,
   .about-section ul li {
     font-size: 1em;
+  }
+  .cards-container {
+    justify-content: center;
+  }
+  .popup {
+    width: 80%;
   }
 }
