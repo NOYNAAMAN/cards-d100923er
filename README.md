@@ -94,7 +94,9 @@ Welcome to the Business Cards Project! Here, you can create, manage, and enjoy b
 ## User types
 ### Admin
 ### Business User
-### Regular User:
+### Regular User
+
+
 
 ## API documentation:
 ### CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
