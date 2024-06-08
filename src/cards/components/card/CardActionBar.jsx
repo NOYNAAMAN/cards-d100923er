@@ -9,6 +9,8 @@ import { useUser } from "../../../users/providers/UserProviders";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routerModel";
 import { useSnack } from "../../../providers/SnackbarProvider";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { call, sendWhatsAppMessage } from "../../utils/cardsUtils";
 
 export default function CardActionBar({
   handleCardDelete,
@@ -16,6 +18,7 @@ export default function CardActionBar({
   cardId,
   userId,
   likes,
+  phone
 }) {
   const { user } = useUser();
   let loggedInUserId = 0;
@@ -48,7 +51,6 @@ export default function CardActionBar({
   };
 
   const handleCardEdit = (id) => {
-    console.log("Navigate to edit page for card", id);
     navigate(ROUTES.EDIT_CARD + "/" + id);
   };
 
@@ -68,8 +70,11 @@ export default function CardActionBar({
         ) : null}
       </Box>
       <Box>
-        <IconButton>
+        <IconButton onClick={() => call(phone)}>
           <CallIcon />
+        </IconButton>
+        <IconButton onClick={() => sendWhatsAppMessage(phone)}>
+          <WhatsAppIcon />
         </IconButton>
         <IconButton onClick={toggleLike}>
           {liked ? (

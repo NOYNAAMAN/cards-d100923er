@@ -42,10 +42,7 @@ export default function EditCardPage() {
   //useEffect - update the form data to this card data
   useEffect(() => {
     getCardById(id).then((data) => {
-      console.log("data -> ", data);
       const modelCard = mapCardToModel(data);
-      console.log("modelCard -> ", modelCard);
-      console.log(data);
       setData(modelCard);
     });
   }, [getCardById, setData, id]);

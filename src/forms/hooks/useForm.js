@@ -30,7 +30,6 @@ export default function useForm(initialForm, schema, handleSubmit) {
           return obj;
         });
       }
-      console.log(typeof value);
       setData((prev) => ({
         ...prev,
         [name]: value,

@@ -20,7 +20,7 @@ export default function LoginPage() {
   if (user) return <Navigate to={ROUTES.ROOT} replace={true} />;
   return (
     <Container>
-      <PageHader titel="Welcome to Login page" subtitle="here you can log in" />
+      <PageHader title="Welcome to Login page" subtitle="here you can log in" />
       <Container
         sx={{
           paddingTop: 8,

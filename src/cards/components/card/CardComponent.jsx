@@ -5,6 +5,7 @@ import CardBody from "./CardBody";
 import CardActionBar from "./CardActionBar";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routerModel";
+import { fixIsraelPhoneNumber } from "../../utils/cardsUtils";
 
 export default function CardComponent({
   card,
@@ -33,6 +34,7 @@ export default function CardComponent({
         cardId={card._id}
         userId={card.user_id}
         likes={card.likes}
+        phone={fixIsraelPhoneNumber(card.phone)}
       />
     </Card>
   );

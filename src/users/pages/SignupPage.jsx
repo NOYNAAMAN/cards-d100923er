@@ -18,7 +18,7 @@ export default function SignupPage() {
     handleReset,
     validateForm,
     onSubmit,
-    handleChangeCheckBox,
+    handleChangeCheckBox, 
   } = useForm(initialSignupForm, signupSchema, handleSignup);
 
   const { user } = useUser();

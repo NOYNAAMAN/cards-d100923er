@@ -64,7 +64,7 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
             />
             <MenuLink
               text="Edit Account"
-              navigateTo={ROUTES.EDIT_USER}
+              navigateTo={ROUTES.EDIT_ACCOUNT}
               onClick={onClose}
             />
             <MenuItem onClick={onLogout}>Logout</MenuItem>

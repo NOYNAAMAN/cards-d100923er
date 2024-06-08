@@ -105,7 +105,6 @@ export const getLocationCoordniate = async (address) => {
       return response.data.results[0].geometry.location;
     }
     else {
-      console.log("Google maps API are not called - we are not in production mode.");
       return {
         lat: 32.084041,
         lng: 34.887762

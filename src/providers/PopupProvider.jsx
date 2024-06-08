@@ -63,41 +63,44 @@ export const PopupProvider = ({ children }) => {
   );
 
   return (
-    <PopupContext.Provider value={{ showPopup, hidePopup }}>
-      {children}
-      {popupContent.title && (
-        <div style={styles.popupContainer} className="popup">
-          <div style={styles.popupContent} className="popup-content">
-            <Typography style={{ color: popupContent.color }}>
-              <Icon component={popupContent.icon} style={styles.warningIcon} />
-              {popupContent.title}
-            </Typography>
-            <Typography style={{ color: popupContent.color }}>
-              {popupContent.content}
-            </Typography>
-            <div style={{ marginTop: "20px" }}>
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="small"
-                style={styles.button}
-                onClick={popupContent.onCancel || hidePopup}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="small"
-                style={styles.button}
-                onClick={handleSave}
-              >
-                Save
-              </Button>
+      <PopupContext.Provider value={{ showPopup, hidePopup }}>
+        {children}
+        {popupContent.title && (
+          <div style={styles.popupContainer} className="popup">
+            <div style={styles.popupContent} className="popup-content">
+              <Typography style={{ color: popupContent.color }}>
+                <Icon
+                  component={popupContent.icon}
+                  style={styles.warningIcon}
+                />
+                {popupContent.title}
+              </Typography>
+              <Typography style={{ color: popupContent.color }}>
+                {popupContent.content}
+              </Typography>
+              <div style={{ marginTop: "20px" }}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  style={styles.button}
+                  onClick={popupContent.onCancel || hidePopup}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  style={styles.button}
+                  onClick={handleSave}
+                >
+                  Save
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </PopupContext.Provider>
+        )}
+      </PopupContext.Provider>
   );
 };

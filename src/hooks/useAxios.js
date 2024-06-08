@@ -13,7 +13,6 @@ export default function useAxios() {
     axios.defaults.headers.common["x-auth-token"] = token;
 
     const requestInterceptor = axios.interceptors.request.use((data) => {
-      console.log("request out");
       return Promise.resolve(data);
     });
 
