@@ -7,10 +7,10 @@ import EditForm from "../components/EditForm";
 import initialEditForm from "../helpers/initialForms/initialEditForm";
 import userToModel from "../helpers/initialForms/userToModel";
 
-import { getUser } from "../services/localStorageService";
 import ROUTES from "../../routes/routerModel";
 import { Navigate } from "react-router-dom";
 import { usePopup } from "../../providers/PopupProvider";
+import { getUser } from "../services/userService";
 
 export default function UpdateUserPage() {
   const { handleUpdateUser, handleGetUser } = useUsers();

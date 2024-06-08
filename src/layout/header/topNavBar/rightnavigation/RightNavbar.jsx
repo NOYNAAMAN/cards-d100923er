@@ -21,13 +21,13 @@ export default function RightNavBar() {
           alignItems: "center",
         }}
       >
+        <SearchMenu />
         <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
 
         {user && <Logged />}
         {!user && <NotLogged />}
-        <SearchMenu />
       </Box>
 
       <MoreButton />

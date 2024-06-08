@@ -37,10 +37,10 @@ const ListUsers = () => {
     fetchUsers();
   }, [handleGetUsers]);
 
-  const handleCheckboxChange = useCallback(
+  const handleIsBusinessChange = useCallback(
     async (userId, currentStatus) => {
       try {
-        await changeUserStatus(userId);
+        await changeUserStatus(userId, currentStatus);
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
             user._id === userId ? { ...user, isBusiness: !currentStatus } : user
@@ -137,7 +137,7 @@ const ListUsers = () => {
                       checked={user.isBusiness}
                       color="primary"
                       onChange={() =>
-                        handleCheckboxChange(user._id, user.isBusiness)
+                        handleIsBusinessChange(user._id, user.isBusiness)
                       }
                     />
                   </TableCell>

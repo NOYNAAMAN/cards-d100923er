@@ -33,6 +33,7 @@ export default function SnackbarProvider({ children }) {
           open={true}
           onClose={() => handleClose(snack.key)}
           autoHideDuration={5000}
+          sx={{ zIndex: 99999 }}
         >
           <Alert
             onClose={() => handleClose(snack.key)}

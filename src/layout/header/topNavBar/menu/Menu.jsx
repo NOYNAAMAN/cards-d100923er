@@ -74,7 +74,6 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
               onClick={onClose}
               styles={{ display: { xs: "block", md: "none" } }}
             />
-            <MenuItem onClick={onLogout}>Logout</MenuItem>
           </>
         )}
 
@@ -86,6 +85,7 @@ export default function Menu({ isOpen, anchorEl, onClose }) {
             styles={{ display: { xs: "block", md: "none" } }}
           />
         )}
+        {user && <MenuItem onClick={onLogout}>Logout</MenuItem>}
       </Box>
     </MuiMenu>
   );

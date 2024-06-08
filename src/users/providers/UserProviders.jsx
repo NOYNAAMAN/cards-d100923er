@@ -5,13 +5,19 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { getUser, getToken } from "../services/localStorageService";
+import {
+  LOCAL_STORAGE_KEYS,
+  getItemInLocalStorage,
+} from "../services/localStorageService";
+import { getUser } from "../services/userService";
 
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(getToken());
+  const [token, setToken] = useState(
+    getItemInLocalStorage(LOCAL_STORAGE_KEYS.USER_TOKEN, null)
+  );
 
   useEffect(() => {
     if (!user) {

@@ -11,7 +11,6 @@ import {
 } from "../services/userApiService";
 import {
   LOCAL_STORAGE_KEYS,
-  getUser,
   removeToken,
   setItemInLocalStorage,
 } from "../services/localStorageService";
@@ -24,6 +23,7 @@ import mapToModelUser from "../helpers/normalization/mapToModelUser";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { usePopup } from "../../providers/PopupProvider";
+import { getUser } from "../services/userService";
 
 const useUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -156,14 +156,21 @@ const useUsers = () => {
     [setSnack, setUser, showPopup]
   );
 
-  const changeUserStatus = useCallback(async (user) => {
-    try {
-      const response = await changeUserBussinesStatus(user);
-      return response;
-    } catch (error) {
-      setError(error.message);
-    }
-  }, []);
+  const changeUserStatus = useCallback(
+    async (user, currentStatus) => {
+      try {
+        const response = await changeUserBussinesStatus(user);
+
+        if (currentStatus) setSnack("success", "User changed to not business");
+        else setSnack("success", "User become member of IsBusiness");
+
+        return response;
+      } catch (error) {
+        setError(error.message);
+      }
+    },
+    [setSnack]
+  );
 
   return {
     user,

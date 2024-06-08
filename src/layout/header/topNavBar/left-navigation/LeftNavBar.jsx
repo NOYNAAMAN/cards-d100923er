@@ -41,6 +41,7 @@ export default function LeftNavBar() {
       {user && (user.isBusiness || user.isAdmin) && (
         <NavItem to={ROUTES.MY_CARDS} label={"My Cards"} />
       )}
+      {user && user.isAdmin && <NavItem to={ROUTES.ADMIN} label={"Admin"} />}
     </Box>
   );
 }

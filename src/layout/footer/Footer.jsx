@@ -19,7 +19,7 @@ export default function Footer() {
         left: 0,
         right: 0,
         borderTop: "2px solid #DDEBF6",
-        borderBottom: "2px solid #142E35",
+        zIndex: 9999,
       }}
       elevation={0}
     >

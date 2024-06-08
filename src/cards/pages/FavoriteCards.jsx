@@ -25,7 +25,7 @@ export default function FavoriteCardsPage() {
   return (
     <div>
       <PageHader
-        title="Favorit cards"
+        title="Favorite cards"
         subtitle="On this page you can find all bussines cards you liked"
       />
       <CardsFeedback

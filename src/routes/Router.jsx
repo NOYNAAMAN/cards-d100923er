@@ -14,8 +14,8 @@ import ProfilePage from "../cards/pages/ProfilePage";
 import UpdateUserPage from "../users/pages/UpdateUserPage";
 import SearchMenu from "../layout/header/topNavBar/rightnavigation/SearchMenu";
 
-import { getUser } from "../users/services/localStorageService";
 import AdminPage from "../users/admin/AdminPage/AdminPage";
+import { getUser } from "../users/services/userService";
 
 export default function Router() {
   const user = getUser();

@@ -92,7 +92,7 @@ export const getLocationCoordniate = async (address) => {
   };
   axios.defaults.headers.common["x-auth-token"] = null;
   try {
-    if (process.env.IS_PRODUCTION) {
+    if (process.env.REACT_APP_IS_PRODUCTION) {
       const response = await axios.get(googleMapUrl, { params });
       return response.data.results[0].geometry.location;
     } else {

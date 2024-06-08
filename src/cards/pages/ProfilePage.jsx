@@ -13,11 +13,11 @@ import {
 import Error from "../../components/Error";
 import { useNavigate } from "react-router-dom";
 import useUsers from "../../users/hooks/useUsers";
-import { getUser } from "../../users/services/localStorageService";
 import ROUTES from "../../routes/routerModel";
 import Spinner from "../../components/Spiner";
 
 import ButtonActionComponent from "../components/ButtonActionComponent";
+import { getUser } from "../../users/services/userService";
 
 export default function ProfilePage() {
   const { handleGetUser, error, isLoading } = useUsers();

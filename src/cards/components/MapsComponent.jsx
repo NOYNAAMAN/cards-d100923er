@@ -37,8 +37,10 @@ const Map = ({ card }) => {
     <>
       {loading ? (
         <div>Loading map...</div>
-      ) : locationExist && process.env.IS_PRODUCTION ? (
-        <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&loading=async`}>
+      ) : locationExist && process.env.REACT_APP_IS_PRODUCTION ? (
+        <LoadScript
+          googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&loading=async`}
+        >
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={marker}
