@@ -91,6 +91,15 @@ Welcome to the Business Cards Project! Here, you can create, manage, and enjoy b
 - **Styled Components**: For styling.
 - **Joi**: For validation.
 
+## User types
+### Admin
+### Business User
+### Regular User:
+
+## API documentation:
+### CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
+### USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
+
 ## Getting Started
 
 To get started with this project, clone the repository and install the dependencies:
@@ -100,10 +109,5 @@ git clone https://github.com/NOYNAAMAN/cards-d100923er
 npm install
 ```
 
-### User types
-### Admin
-### Business User
-## Regular User:
-### API documentation:
-CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
-USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
+
+
